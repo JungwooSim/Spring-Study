@@ -22,7 +22,7 @@
 
 내부적으로는 이벤트 루프 방식을 구현한 Reactive Stream API([http://www.reactive-streams.org](http://www.reactive-streams.org/)) 를 사용
 
-<img src="/img/1.png" width="500px;">
+<img src="https://github.com/JungwooSim/Spring-Study/blob/main/webclient/img/1.png" width="500px;">
 
 - 이벤트 큐로부터 이벤트들을 순차적으로 처리하고 알맞은 콜백 함수를 실행
 

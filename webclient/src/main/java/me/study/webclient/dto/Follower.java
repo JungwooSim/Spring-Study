@@ -11,23 +11,23 @@ import lombok.NoArgsConstructor;
 public class Follower {
     public Follower(Follower follower) {
         this.siteAdmin = follower.isSiteAdmin();
-//        this.type = follower.getType();
-//        this.receivedEventsUrl = follower.getReceivedEventsUrl();
-//        this.eventsUrl = follower.getEventsUrl();
-//        this.reposUrl = follower.getReposUrl();
-//        this.organizationsUrl = follower.getOrganizationsUrl();
-//        this.subscriptionsUrl = follower.getSubscriptionsUrl();
-//        this.starredUrl = follower.getStarredUrl();
-//        this.gistsUrl = follower.getGistsUrl();
-//        this.followingUrl = follower.getFollowingUrl();
-//        this.followersUrl = follower.getFollowersUrl();
-//        this.htmlUrl = follower.getHtmlUrl();
-//        this.url = follower.getUrl();
-//        this.gravatarId = follower.getGravatarId();
-//        this.avatarUrl = follower.getAvatarUrl();
-//        this.nodeId = follower.getNodeId();
-//        this.id = follower.getId();
-//        this.login = follower.getLogin();
+        this.type = follower.getType();
+        this.receivedEventsUrl = follower.getReceivedEventsUrl();
+        this.eventsUrl = follower.getEventsUrl();
+        this.reposUrl = follower.getReposUrl();
+        this.organizationsUrl = follower.getOrganizationsUrl();
+        this.subscriptionsUrl = follower.getSubscriptionsUrl();
+        this.starredUrl = follower.getStarredUrl();
+        this.gistsUrl = follower.getGistsUrl();
+        this.followingUrl = follower.getFollowingUrl();
+        this.followersUrl = follower.getFollowersUrl();
+        this.htmlUrl = follower.getHtmlUrl();
+        this.url = follower.getUrl();
+        this.gravatarId = follower.getGravatarId();
+        this.avatarUrl = follower.getAvatarUrl();
+        this.nodeId = follower.getNodeId();
+        this.id = follower.getId();
+        this.login = follower.getLogin();
     }
 
     @JsonProperty("site_admin")
