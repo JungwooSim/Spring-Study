@@ -3,8 +3,8 @@
 
 - Spring 5 에 포함
 - Spring WebFlux Module 의 한 부분
-- Functional Sytel API
-- Synchronous 와 Asynchronous Rest API Client
+- Functional Style API
+- synchronous 와 assynchronous **** Rest API Client
 - Asynchronous 가 default 이다.
 
 ### 써야하는 이유
@@ -36,3 +36,5 @@
 - [https://www.youtube.com/watch?v=BSRW1HtNyCo](https://www.youtube.com/watch?v=BSRW1HtNyCo)
 - Thread per request VS. Event Loop Model in Spring - [https://velog.io/@jihoson94/EventLoopModelInSpring](https://velog.io/@jihoson94/EventLoopModelInSpring)
 - Reactive Streams 이란? - [https://velog.io/@jihoson94/Reactive-Streams](https://velog.io/@jihoson94/Reactive-Streams)
+- Concurrency in Spring Webflux - [https://www.baeldung.com/spring-webflux-concurrency](https://www.baeldung.com/spring-webflux-concurrency)
+- tomcat 동작원리 - [https://exhibitlove.tistory.com/312](https://exhibitlove.tistory.com/312)
