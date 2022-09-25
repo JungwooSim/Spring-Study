@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.4")
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.apache.kafka:kafka-streams")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
