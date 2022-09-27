@@ -13,11 +13,9 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.core.ProducerFactory
+import org.springframework.kafka.listener.ContainerProperties
 import org.springframework.kafka.support.serializer.JsonDeserializer
 import org.springframework.kafka.support.serializer.JsonSerializer
-
-
-
 
 @Configuration
 class HelloKafkaCustomMessage {
@@ -58,6 +56,7 @@ class HelloKafkaCustomMessage {
   fun helloKafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, DataDto> {
     val factory = ConcurrentKafkaListenerContainerFactory<String, DataDto>()
     factory.consumerFactory = helloKafkaConsumerFactory()
+    factory.containerProperties.ackMode = ContainerProperties.AckMode.MANUAL
     return factory
   }
 }
