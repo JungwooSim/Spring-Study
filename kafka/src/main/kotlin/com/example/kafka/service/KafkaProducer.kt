@@ -1,11 +1,11 @@
 package com.example.kafka.service
 
 import com.example.kafka.dto.DataDto
-import javax.annotation.PostConstruct
+import jakarta.annotation.PostConstruct
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
-@Service
+//@Service
 class KafkaProducer(
   private val helloKafkaTemplate: KafkaTemplate<String, DataDto>
 ) {
