@@ -12,14 +12,14 @@ import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.core.KafkaAdmin
 
-//@EnableKafka
-//@Configuration
+@EnableKafka
+@Configuration
 class KafkaConfig {
 
-  val bootstrapAddress: String = "localhost:9092"
+  val bootstrapAddress: String = "localhost:29092"
 
   @Bean
-  fun admin() = KafkaAdmin(mapOf(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG to "localhost:9092"))
+  fun admin() = KafkaAdmin(mapOf(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG to "localhost:29092"))
 
   @Bean
   fun topics() = KafkaAdmin.NewTopics(

@@ -20,7 +20,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer
 @Configuration
 class HelloKafkaCustomMessage {
 
-  val bootstrapAddress: String = "localhost:9092"
+  val bootstrapAddress: String = "localhost:29092"
 
   @Bean
   fun helloKafkaProducerFactory(): ProducerFactory<String, DataDto> {
