@@ -17,7 +17,7 @@ import org.springframework.kafka.listener.ContainerProperties
 import org.springframework.kafka.support.serializer.JsonDeserializer
 import org.springframework.kafka.support.serializer.JsonSerializer
 
-@Configuration
+//@Configuration
 class HelloKafkaCustomMessage {
 
   val bootstrapAddress: String = "localhost:29092"

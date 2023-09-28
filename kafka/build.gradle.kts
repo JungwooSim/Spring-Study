@@ -23,6 +23,8 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.springframework.kafka:spring-kafka")
   implementation("io.github.microutils:kotlin-logging:3.0.5")
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
+
   runtimeOnly("com.h2database:h2")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.kafka:spring-kafka-test")

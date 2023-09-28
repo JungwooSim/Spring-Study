@@ -12,8 +12,7 @@ import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.core.KafkaAdmin
 
-//@EnableKafka
-//@Configuration
+@Configuration
 class KafkaConfig {
 
   val bootstrapAddress: String = "localhost:29092"
