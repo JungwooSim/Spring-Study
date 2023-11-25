@@ -10,13 +10,27 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/customers")
 class CustomerController(val repository: CustomerRepository) {
 
     @GetMapping
-    fun findAll() = repository.findAll()
+    fun findAll(): String {
+        repository.findAll()
+
+        println("customer 1 NOW : ${LocalDateTime.now()}")
+        return "OKOK"
+    }
+
+    @GetMapping("/2")
+    fun findAll2(): String {
+        repository.findAll()
+
+        println("customer 2 NOW : ${LocalDateTime.now()}")
+        return "OKOK"
+    }
 
     @PostMapping
     fun addCustomer(@RequestBody customer: Customer) = repository.save(customer)

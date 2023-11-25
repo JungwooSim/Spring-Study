@@ -24,9 +24,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("com.auth0:auth0:1.1.0")
-    implementation("com.auth0:auth0-spring-security-api:1.0.0-rc.2")
+//    implementation("org.springframework.boot:spring-boot-starter-security")
+//    implementation("com.auth0:auth0:1.1.0")
+//    implementation("com.auth0:auth0-spring-security-api:1.0.0-rc.2")
 
 }
 
