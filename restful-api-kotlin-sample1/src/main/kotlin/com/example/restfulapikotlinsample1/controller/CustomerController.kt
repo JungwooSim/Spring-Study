@@ -2,6 +2,9 @@ package com.example.restfulapikotlinsample1.controller
 
 import com.example.restfulapikotlinsample1.model.Customer
 import com.example.restfulapikotlinsample1.persistence.CustomerRepository
+import com.example.restfulapikotlinsample1.service.ApiService
+import java.time.LocalDateTime
+import java.util.concurrent.ExecutionException
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -10,11 +13,14 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
+
 
 @RestController
 @RequestMapping("/customers")
-class CustomerController(val repository: CustomerRepository) {
+class CustomerController(
+    val repository: CustomerRepository,
+    val apiService: ApiService
+) {
 
     @GetMapping
     fun findAll(): String {
@@ -46,4 +52,10 @@ class CustomerController(val repository: CustomerRepository) {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long) = repository.findById(id)
+
+    @GetMapping("/test")
+    @Throws(ExecutionException::class, InterruptedException::class)
+    fun compareApis(): String? {
+        return apiService.a()
+    }
 }
