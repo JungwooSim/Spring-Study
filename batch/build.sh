@@ -1,0 +1,1 @@
+./gradlew bootRun --args='--spring.batch.job.name=csvImportJob_V3 version=test7'

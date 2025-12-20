@@ -1,10 +1,13 @@
 package me.study.batch.job_config
 
-import me.study.batch.dto.CustomerDto
 import jakarta.persistence.EntityManagerFactory
+import java.lang.Exception
 import javax.sql.DataSource
+import me.study.batch.CsvJobSkipListener
+import me.study.batch.dto.CustomerDto
 import me.study.batch.entity.Customer
 import org.springframework.batch.core.Job
+import org.springframework.batch.core.SkipListener
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.launch.support.RunIdIncrementer
@@ -12,13 +15,12 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
 import org.springframework.batch.item.ItemProcessor
 import org.springframework.batch.item.database.JdbcBatchItemWriter
-import org.springframework.batch.item.database.JpaItemWriter
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder
-import org.springframework.batch.item.database.builder.JpaItemWriterBuilder
 import org.springframework.batch.item.file.FlatFileItemReader
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.PlatformTransactionManager
 
@@ -27,14 +29,16 @@ class CsvImportJobConfig(
   private val jobRepository: JobRepository,
   private val transactionManager: PlatformTransactionManager,
   private val entityManagerFactory: EntityManagerFactory,
+  private val csvJobSkipListener: CsvJobSkipListener,
   private val dataSource: DataSource // EntityManagerFactory 대신 DataSource 주입
+
 ) {
 
   // 1. Job 정의
   @Bean
   fun csvImportJob(): Job {
     return JobBuilder("csvImportJob_V3", jobRepository)
-      .incrementer(RunIdIncrementer())
+//      .incrementer(RunIdIncrementer())
       .start(csvImportStep())
       .build()
   }
@@ -47,6 +51,25 @@ class CsvImportJobConfig(
       .reader(csvReader())
       .processor(csvProcessor())
       .writer(csvWriter())
+      .faultTolerant()
+      .skip(Exception::class.java)
+      .skipLimit(Int.MAX_VALUE)
+      .listener(csvJobSkipListener)
+//      .listener(object : SkipListener<CustomerDto, Customer> {
+//        override fun onSkipInRead(t: Throwable) {
+//          println("읽기 중 에러 발생: ${t.message}")
+//        }
+//
+//        // Processor에서 에러가 나서 Skip 될 때 실행됨
+//        override fun onSkipInProcess(item: CustomerDto, t: Throwable) {
+//          println("처리 중 에러 발생 (Skipped): $item, 원인: ${t.message}")
+//          // 실무에서는 여기서 별도 에러 테이블(BATCH_ERROR_LOG)에 insert 하기도 함
+//        }
+//
+//        override fun onSkipInWrite(item: Customer, t: Throwable) {
+//          println("쓰기 중 에러 발생: $item, 원인: ${t.message}")
+//        }
+//      })
       .build()
   }
 
@@ -68,8 +91,13 @@ class CsvImportJobConfig(
   fun csvProcessor(): ItemProcessor<CustomerDto, Customer> {
     return ItemProcessor { item ->
       // 예제 전처리: 나이가 30 미만이면 null을 반환하여 필터링 (DB 저장 안 함)
-      if (item.age < 30) {
-        return@ItemProcessor null
+//      if (item.age < 30) {
+//        return@ItemProcessor null
+//      }
+
+      // 실패 테스트
+      if (item.name == "ERROR") {
+        throw IllegalArgumentException("잘못된 이름입니다: ${item.name}")
       }
 
       // 이름 대문자 변환 후 Entity 생성
@@ -89,7 +117,7 @@ class CsvImportJobConfig(
 //      .build()
 //  }
 
-  // TODO : 벌크 Insert 로 변환하기
+  // 5-2 Bulk Writer
   // [핵심 변경] JpaItemWriter -> JdbcBatchItemWriter
   @Bean
   fun csvWriter(): JdbcBatchItemWriter<Customer> {
