@@ -58,3 +58,14 @@ CREATE TABLE batch_error_log (
     content TEXT COMMENT '실패한 데이터 원본',
     error_date DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) COMMENT '에러 발생 시각'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- auto-generated definition
+create table customer
+(
+    id         bigint auto_increment
+        primary key,
+    age        int                                not null,
+    email      varchar(255)                       null,
+    name       varchar(255)                       null,
+    created_at datetime default CURRENT_TIMESTAMP null
+);

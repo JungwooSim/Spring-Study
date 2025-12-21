@@ -55,21 +55,22 @@ class CsvImportJobConfig(
       .skip(Exception::class.java)
       .skipLimit(Int.MAX_VALUE)
       .listener(csvJobSkipListener)
-//      .listener(object : SkipListener<CustomerDto, Customer> {
-//        override fun onSkipInRead(t: Throwable) {
-//          println("읽기 중 에러 발생: ${t.message}")
-//        }
-//
-//        // Processor에서 에러가 나서 Skip 될 때 실행됨
-//        override fun onSkipInProcess(item: CustomerDto, t: Throwable) {
-//          println("처리 중 에러 발생 (Skipped): $item, 원인: ${t.message}")
-//          // 실무에서는 여기서 별도 에러 테이블(BATCH_ERROR_LOG)에 insert 하기도 함
-//        }
-//
-//        override fun onSkipInWrite(item: Customer, t: Throwable) {
-//          println("쓰기 중 에러 발생: $item, 원인: ${t.message}")
-//        }
-//      })
+
+      .listener(object : SkipListener<CustomerDto, Customer> { // 2개 사용해도 무방하다.
+        override fun onSkipInRead(t: Throwable) {
+          println("읽기 중 에러 발생: ${t.message}")
+        }
+
+        // Processor에서 에러가 나서 Skip 될 때 실행됨
+        override fun onSkipInProcess(item: CustomerDto, t: Throwable) {
+          println("처리 중 에러 발생 (Skipped): $item, 원인: ${t.message}")
+          // 실무에서는 여기서 별도 에러 테이블(BATCH_ERROR_LOG)에 insert 하기도 함
+        }
+
+        override fun onSkipInWrite(item: Customer, t: Throwable) {
+          println("쓰기 중 에러 발생: $item, 원인: ${t.message}")
+        }
+      })
       .build()
   }
 
